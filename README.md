@@ -12,9 +12,11 @@ Vous devrez ensuite effectuer les modifications suivantes pour adapter l'applica
 *Pour le "Controller" (Controller/Visualize/VisualizeController.cs) :*
 <br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/visualizeB.png "Img_B")
+<br>
 *Pour la "View" (Views/Visualize/Index.cshtml)*
 <br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/visualizeC.png "Img_C")
+<br>
 *Pour le fichier javascript (Content/VisualizeConfig.js) :*
 <br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/visualizeD.png "Img_D")
