@@ -16,34 +16,23 @@ namespace TestVisualizeJS.Controllers.Visualize
     public class VisualizeController : Controller
     {
         // GET: Visualize
-        public ActionResult Index(string username = "", string password = "", bool login_form_completed = false)
+        public ActionResult Index(string username="", string password="")
         {
             VisiteurWeb client = new VisiteurWeb();
+            //String type = "PDF";
             String nom = "Arnaud";
             client.Nom = nom;
             ViewData["visiteur_name"] = nom;
 
-            //if the login form isn't completed, return to classic login form page
-            if (login_form_completed == false)
-            {
-                ViewBag.folder_choice = "";
-                ViewBag.first_resource_label = "";
-                ViewBag.first_resource_uri = "";
-                ViewBag.first_resource_type = "";
-                ViewBag.error = "";
-                ViewBag.credentials = ":";
-                return View("Index", client);
-            }
-
             //// GET URI OF FIRST JASPER RESSOURCE FOR OUR FOLDER ////
-            var folder_choice = "/L4_logistics/Conception/rapports_test/test/test_mongodb";//"/L4_logistics/Conception/rapports_test/test/test_mongodb/sous_dossier_num_2/sous_sous_dossier_test/so_so_so_dossier/so_so_so_so_dossier";
-            // Credentials
-            var credentials_jasper = username + ":" + password;
+            var folder_choice = "/L4_logistics/Conception/rapports_test/test/test_mongodb";//"/L4_logistics/Conception/rapports_test/test/test_mongodb/sous_dossier_num_2/sous_sous_dossier_test/so_so_so_dossier/so_so_so_so_dossier";//"/L4_logistics/Conception/rapports_test/test/test_mongodb";//"/L4_logistics/Conception/rapports_test/copy_reports";//"/L4_logistics/Conception/rapports_test/test/test_mongodb";//was &type=reportunit
+            var credentials_jasper = username + ":" + password;//HttpUtility.UrlEncode(username) + ":" + HttpUtility.UrlEncode(password);//"asimon:37\"/vBjA"; // Credentials
 
-            // List all reports of a folder X (here conception/rapports_test/test/test_mongodb) of the repository
-            String encoded_rest_list_reports = System.Convert.ToBase64String(System.Text.Encoding.
-            GetEncoding("ISO-8859-1").GetBytes(credentials_jasper));
-            string URL_rest_list_reports = "http://srvreporting-01:8080/jasperserver-pro/rest_v2/resources?folderUri=" + folder_choice + "&sortBy=uri";
+                // List all reports of a folder X (here conception/rapports_test/test/test_mongodb) of the repository
+
+                String encoded_rest_list_reports = System.Convert.ToBase64String(System.Text.Encoding.
+                GetEncoding("ISO-8859-1").GetBytes(credentials_jasper));
+            string URL_rest_list_reports = "http://srvreporting-01:8080/jasperserver-pro/rest_v2/resources?folderUri="+folder_choice+"&sortBy=uri";
 
             CookieContainer myContainer_rest_list_reports = new CookieContainer();
             HttpWebRequest request_rest_list_reports = (HttpWebRequest)WebRequest.Create(URL_rest_list_reports);
@@ -53,7 +42,6 @@ namespace TestVisualizeJS.Controllers.Visualize
             request_rest_list_reports.Headers.Add("Authorization", "Basic " + encoded_rest_list_reports);
 
             HttpWebResponse response_rest_list_reports;
-            // If credentials are correct, it's possible to get the response for our query, if not, send an error to the view
             try
             {
                 response_rest_list_reports = (HttpWebResponse)request_rest_list_reports.GetResponse();
@@ -78,7 +66,7 @@ namespace TestVisualizeJS.Controllers.Visualize
             // String to XML
             XmlDocument string_to_xml = new XmlDocument();
             string_to_xml.LoadXml(response_str_list_reports);
-
+            
             // Get all "label", "uri" and "resourceType" tags of the list
             XmlNodeList labelList = string_to_xml.GetElementsByTagName("label");
             XmlNodeList uriList = string_to_xml.GetElementsByTagName("uri");
@@ -88,7 +76,7 @@ namespace TestVisualizeJS.Controllers.Visualize
 
             for (int i = 0; i < labelList.Count; i++)
             {
-                if (resourceTypeList[i].InnerXml == "dashboard" ||
+                if(resourceTypeList[i].InnerXml == "dashboard" || 
                     resourceTypeList[i].InnerXml == "reportUnit")
                 {
                     // stock folder_choice, resource label and uri in Viewbags to transfer data to the View
@@ -111,11 +99,39 @@ namespace TestVisualizeJS.Controllers.Visualize
         public ActionResult myForm(Models.VisiteurWeb formData)
         {
             VisiteurWeb client = new VisiteurWeb();
+            //String type = "PDF";
             String nom = "Arnaud";
             client.Nom = nom;
 
-            return RedirectToAction("Index", "Visualize", new { username = formData.Username, password = formData.Password, login_form_completed = true });
+            /*
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\asimon\\Documents\\visual studio projects\\TestVisualizeJS\\TestVisualizeJS\\Controllers\\Visualize\\email.txt", true)) //// true to append data to the file
+            {
+                writer.WriteLine(formData.Username);
+                writer.WriteLine("\n"+formData.Password);
+                writer.WriteLine("\nTEST");
+            }
+            */
+
+            return RedirectToAction("Index", "Visualize", new { username = formData.Username, password = formData.Password });
         }
-   
+        /*
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Index(VisiteurWeb visiteur, string submit)
+        {
+            //TEST JASPER INTO ASP WITHOUT WARNING
+            VisiteurWeb client = new VisiteurWeb();
+            string prenom = submit;
+
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\asimon\\Documents\\visual studio projects\\TestVisualizeJS\\TestVisualizeJS\\Controllers\\Visualize\\email.txt", true)) //// true to append data to the file
+            {
+                writer.WriteLine(submit);
+                writer.WriteLine("\nTEST");
+            }
+
+            return View("Index", client);
+        }
+        */
+
+
     }
 }

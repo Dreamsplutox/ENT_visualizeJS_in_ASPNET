@@ -16,24 +16,12 @@ namespace TestVisualizeJS.Controllers.Visualize
     public class VisualizeController : Controller
     {
         // GET: Visualize
-        public ActionResult Index(string username = "", string password = "", bool login_form_completed = false)
+        public ActionResult Index(string username = "", string password = "")
         {
             VisiteurWeb client = new VisiteurWeb();
             String nom = "Arnaud";
             client.Nom = nom;
             ViewData["visiteur_name"] = nom;
-
-            //if the login form isn't completed, return to classic login form page
-            if (login_form_completed == false)
-            {
-                ViewBag.folder_choice = "";
-                ViewBag.first_resource_label = "";
-                ViewBag.first_resource_uri = "";
-                ViewBag.first_resource_type = "";
-                ViewBag.error = "";
-                ViewBag.credentials = ":";
-                return View("Index", client);
-            }
 
             //// GET URI OF FIRST JASPER RESSOURCE FOR OUR FOLDER ////
             var folder_choice = "/L4_logistics/Conception/rapports_test/test/test_mongodb";//"/L4_logistics/Conception/rapports_test/test/test_mongodb/sous_dossier_num_2/sous_sous_dossier_test/so_so_so_dossier/so_so_so_so_dossier";
@@ -114,7 +102,7 @@ namespace TestVisualizeJS.Controllers.Visualize
             String nom = "Arnaud";
             client.Nom = nom;
 
-            return RedirectToAction("Index", "Visualize", new { username = formData.Username, password = formData.Password, login_form_completed = true });
+            return RedirectToAction("Index", "Visualize", new { username = formData.Username, password = formData.Password });
         }
    
     }

@@ -1,0 +1,50 @@
+﻿@model TestVisualizeJS.Models.VisiteurWeb
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="http://srvreporting-01:8080/jasperserver-pro/client/visualize.js"></script>
+    <script type='text/javascript' src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <!-- Get ViewBag data and transfer it to visualize.js-->
+    <script>
+            var folder_choice_var = '@(ViewBag.folder_choice)';
+            var first_resource_uri_var = '@(ViewBag.first_resource_uri)';
+    </script>
+    <script type="text/javascript" src="~/Content/VisualizeConfig.js"></script>
+</head>
+<body>
+    <h2>Test de visualize.js dans une page ASP.NET</h2>
+
+    <h3>Affichage dossiers</h3>
+    <label id="label_resource_selection" for="resource_selection"></label>
+    <br />
+    <select id="resource_selection"></select>
+
+    <div id="container2"></div>
+
+    <h3>Affichage d'un rapport avec des paramètres</h3>
+    <h4>Contrôles d'entrées</h4>
+    <div id="ic" style="width:400px;">Loading</div>
+
+    <h4>Rapport</h4>
+    <button id="button" disabled>Export</button>
+    <br>
+    <br>
+    <button id="previousPage">Previous Page</button>
+    <button id="nextPage">Next Page</button>
+    <label for="page">Find page/range :</label>
+    <input type="text" id="page"/>
+    <br>
+    <div id="container"></div>
+</body>
+
+<!--<script type="text/javascript" src="~/Content/VisualizeConfig.js"></script>-->
+</html>
+

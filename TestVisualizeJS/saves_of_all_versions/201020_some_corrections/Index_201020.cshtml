@@ -1,0 +1,66 @@
+﻿@model TestVisualizeJS.Models.VisiteurWeb
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="http://srvreporting-01:8080/jasperserver-pro/client/visualize.js"></script>
+    <script type='text/javascript' src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <!-- Get ViewBag data and transfer it to visualize.js-->
+    <script>
+        var folder_choice_var = '@(ViewBag.folder_choice)';
+        var first_resource_uri_var = '@(ViewBag.first_resource_uri)';
+        var first_resource_type_var = '@(ViewBag.first_resource_type)';
+    </script>
+    <script type="text/javascript" src="~/Content/VisualizeConfig.js"></script>
+</head>
+<body>
+    <div class="container col-sm-10">
+        <h2>Test de visualize.js dans une page ASP.NET</h2>
+        <h4>Affichage dossiers</h4>
+        <label id="label_resource_selection" for="resource_selection"></label>
+        <br />
+        <select id="resource_selection"></select>
+        <br />
+        <br />
+
+        <h4>Affichage de la ressource</h4>
+        <div class="row">
+            <div class="col-sm-6 border border-primary">
+                <div id="report_ic">
+                    <h5>Contrôles d'entrées</h5>
+                    <div id="ic" style="width:400px;">Loading</div>
+                </div>
+            </div>
+            <div class="col-sm-6 border border-danger">
+                <h5 id="resource_title">Rapport</h5>
+                <div id="report_features">
+                    <button id="export_button" disabled>Export</button>
+                    <br>
+                    <br>
+                    <button id="previousPage">Previous Page</button>
+                    <button id="nextPage">Next Page</button>
+                    <label for="page">Find page/range :</label>
+                    <input type="text" id="page" />
+                    <br>
+                </div>
+            </div>
+        </div>
+
+        <div id="container"></div>
+        <div id="dashboard_container" style="height:600px;"></div>
+    </div>
+</body>
+
+<!--<script type="text/javascript" src="~/Content/VisualizeConfig.js"></script>-->
+</html>
+

@@ -1,9 +1,56 @@
 ﻿//// USEFULL FUNCTIONS SECTION ////
 
-// Get correct color for folder resource (based on the "level" of the folder in the repo)
+
+//Get inputContols of a report from jasper server with specified parameters
+/*
+ function defineInputControls(v, export_button, current_resource, container) {
+    inputControls = v.inputControls({
+        resource: current_resource,//"/L4_logistics/Conception/rapports_test/test/test_mongodb/adaptative_mongodb"
+        container: container,
+        events: {
+            change: function (params, error) {
+                if (!error) {
+                    export_button.removeAttribute("disabled"); //export mode ON
+                    report.params(params).run();
+                }
+            }
+        }
+    });
+
+    return inputControls;
+}
+
+//Get report from jasper server with specified parameters
+function defineReport(v, export_button, current_resource, container, scale) {
+    report = v.report({
+        resource: current_resource,
+        container: "#container",
+        //uncomment to change default behaviour
+        //scale: "width",
+        //scale: "height",
+        //scale: 1,
+        scale: "container",
+
+        success: function () {
+            export_button.removeAttribute("disabled");
+        },
+
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+*/
+
+/*function sleepFor(sleepDuration) {
+    var now = new Date().getTime();
+    while (new Date().getTime() < now + sleepDuration) {} // do nothing  }
+}*/
+
+//Get correct color for folder resource (based on the "level" of the folder in the repo)
 function getFolderColor(original_folder, current_folder, colors_array = ["brown", "blue", "red",
     "orange", "purple", "green", "grey"]) {
-
+    
     var current_size = current_folder.split("/").length;
     var original_size = original_folder.split("/").length;
     var color_size = colors_array.length;
@@ -16,7 +63,7 @@ function getFolderColor(original_folder, current_folder, colors_array = ["brown"
     }
 }
 
-// Get all resource of the specified folder and put them in a select element
+//Get all resource of the specified folder and put them in a select element
 function buildResourceSelectControl(repo, folder_choice) {
     console.log("buildResourceSelectControl function");
     var list_all_uri = [];
@@ -38,7 +85,15 @@ function buildResourceSelectControl(repo, folder_choice) {
             list_resources_types.push(option.resourceType);
             list_resources_labels.push(option.label);
             list_resources_uri.push(option.uri);
+            //return list + `<option disabled style='background-color: blue; color:white;'>${option.label}</option>`
         }
+        /*else {
+            //fill resource arrays
+            list_resources_types.push(option.resourceType);
+            list_resources_labels.push(option.label);
+            list_resources_uri.push(option.uri);
+        }*/
+
     }, "");
 
     console.log("final uri list = " + list_resources_uri + "\n now time to sort");
@@ -63,7 +118,6 @@ function buildResourceSelectControl(repo, folder_choice) {
             current_resource_uri.pop();
             current_resource_uri = current_resource_uri.join("/");
 
-            //Create uri_resource html code in the good order (valid folder)
             if (current_resource_uri == list_all_uri[i]) {
                 console.log("uri base " + i + " is in resource " + y + " " + list_resources_uri[y]);
                 final_list += "<option name=" + list_resources_types[y] + " value=" + list_resources_uri[y] + ">" + list_resources_labels[y] + "</option>" //was labels
@@ -73,36 +127,30 @@ function buildResourceSelectControl(repo, folder_choice) {
 
     // Change existing elements (select element from view and label)
     var my_label = document.getElementById("label_resource_selection");
-    my_label.innerHTML = "Ressources du dossier <b title=" + folder_choice + ">" + folder_choice.split("/").pop() + "</b> : ";
+    my_label.innerHTML = "Ressources du dossier <b>" + folder_choice + "</b>: ";
 
     var my_select = document.getElementById("resource_selection");
     my_select.innerHTML = final_list;
 }
 
-// Hide / show report HTML elements (if resource == dashboard, hide them)
-function hideOrShowReportHTMLElements(hide) {
+//Hide / show report HTML elements (if resource == dashboard, hide them)
+function hideOrShowReportHTMLElements(hide){
     if (hide) {
-        //fixed bar
-        $("#hide_fix_bar").css("display", "none");
+        $("#report_ic").css("display", "none");
+        $("#report_features").css("display", "none");
         //select container for dashboard
         $("#container").css("display", "none");
         $("#dashboard_container").css("display", "block");
-    } else {
-        //fixed bar
-        $("#hide_fix_bar").css("display", "none");
+    }else{
+        $("#report_ic").css("display", "block");
+        $("#report_features").css("display", "block");
         //select container for report
         $("#container").css("display", "block");
         $("#dashboard_container").css("display", "none");
-        //resize report to original size
-        $("#container").css("height", "700px");
-        //update page num
-        $("#page_label").html("page 1 :");
-        //update % of zoom
-        $("#zoom_custom_label").html("Zoom 100% :");
     }
 }
 
-// Creation and config of the export "<select>" element 
+//Config of the export "<select>" element 
 function buildControl(name, options) {
 
     function buildOptions(options) {
@@ -112,48 +160,42 @@ function buildControl(name, options) {
         }, "")
     }
 
-    var template = "<label class='col-form-label'>{label}</label><select class='custom-select col-lg-4'>{options}</select><br>",
+    var template = "<label>{label}</label><select>{options}</select><br>",
         content = template.replace("{label}", name)
             .replace("{options}", buildOptions(options));
 
     var $control = $(content);
     $control.insertBefore($("#export_button"));
-    //return select with all formats (PDF, DOCX, XLS, ...)
+    //return select
     return $($control[1]);
 }
 
 
 //// DYNAMICAL FOLDER AND RESSOURCE SET (FROM OUR CONTROLLER) ==> GLOBAL VARIABLES ////
-
 var current_resource = first_resource_uri_var;
 var current_resource_type = first_resource_type_var;
 var folder_choice = folder_choice_var
-var current_credentials = credentials.split(":");
 console.log("current res : " + current_resource);
 console.log("current res type : " + current_resource_type);
 console.log("fold choice : " + folder_choice);
 
+/// Listes des ressources testées ///
+//"/L4_logistics/Conception/rapports_test/test/test_mongodb/adaptative_mongodb",
+//"/L4_logistics/Planifications/Facturation/SMB/SMB_FAC_SYNTHESE",
+//"/L4_logistics/Conception/rapports_test/test/test_mongodb/sous_dossier_num_2/regroup_smallable",
+//"/L4_logistics/Conception/rapports_test/test/test_mongodb/adaptative_mongodb",
+//"/L4_logistics/Conception/rapports_test/test/test_planif_rapport_modif/test_plani",
 
 //// VISUALIZE SECTION ////
 
 visualize.config({
     auth: {
-        name: current_credentials[0],
-        password: current_credentials[1]
+        name: "asimon",
+        password: "37%22%2FvBjA"
     }
 });
 
 visualize(function (v) {
-
-    //if a variable is set, then resource should be accessible ! display = hide auth + show resource select
-    if (folder_choice != "") {
-        console.log("((((FOLDER CHOICE NOW AVAILABLE ==> " + folder_choice);
-        //show resource selection
-        $("#resource_selection").css("display", "block");
-        $("#label_resource_selection").css("display", "block");
-        //hide auth
-        $("#authentication_jasper").css("display", "none");
-    }
 
     //// GET LIST OF RESOURCES (INSIDE FOLDER) SECTION ////
 
@@ -170,7 +212,6 @@ visualize(function (v) {
         }
     });
 
-    //Based on the type of the first resource (dashboard / report), use the proper configuration
 
     if (first_resource_type_var == "dashboard") {
         //// CONFIGURE DASHBOARD SECTION ////
@@ -180,75 +221,153 @@ visualize(function (v) {
             container: "#dashboard_container",
             success: function () {
                 console.log("dashboard loaded");
+                //hideOrShowReportHTMLElements(true);
+                //export_button.disabled = false;
             },
             error: function (error) {
+                hideOrShowReportHTMLElements(false);
                 console.log(error);
             }
         });
     } else {
-
         //// CONFIGURE REPORT SECTION ////
-
         hideOrShowReportHTMLElements(false);
         report = v.report({
             resource: current_resource,
             container: "#container",
-            //scale on height to update container size later
-            //multiple scale options => (width | height | number : 1 - 2 - 3 | container)
-            scale: "height",
-            //scroll to top when an action is triggered ? (change input_control for example)
-            scrollToTop: true,
-            events: {
-                beforeRender: function (el) {
-                    console.log("------BEFORE RENDERING");
-                },
-                reportCompleted: function (status) {
-                    console.log("----------Report status: " + status + "!");
-                    if (status == "ready") {
-                        //display report features
-                        $("#hide_fix_bar").css("display", "block");
-                    } else {
-                        //if everything is ok, display report features, if not ==> hide
-                        $("#hide_fix_bar").css("display", "none");
-                    }
-                }
-            },
+            //uncomment to change default behaviour
+            //scale: "width",
+            //scale: "height",
+            //scale: 1,
+            scale: "container",
+            scrollToTop: false,
 
             success: function () {
                 console.log("report running");
-                //activate export button
+                //hideOrShowReportHTMLElements(false);
                 export_button.disabled = false;
             },
 
             error: function (error) {
-                //deactivate export button
                 export_button.disabled = true;
                 console.log(error);
             }
         });
 
-
         //// CONFIGURE INPUT CONTROLS SECTION ////
-
         inputControls = v.inputControls({
-            resource: current_resource,
+            resource: current_resource,//"/L4_logistics/Conception/rapports_test/test/test_mongodb/adaptative_mongodb"
             container: "#ic",
             events: {
                 change: function (params, error) {
                     if (!error) {
                         export_button.disabled = false;
-                        $("#hide_fix_bar").css("display", "none");
                         report.params(params).run();
                     }
                 }
             }
         });
+
+        //// PAGINATION SECTION ////
+
+        //previous pagination
+        $("#previousPage").click(function () {
+            var currentPage = report.pages() || 1;
+
+            report
+                .pages(--currentPage)
+                .run()
+                .fail(function (err) { alert(err); });
+        });
+
+        //next pagination
+        $("#nextPage").click(function () {
+            var currentPage = report.pages() || 1;
+
+            report
+                .pages(++currentPage)
+                .run()
+                .fail(function (err) { alert(err); });
+            
+            window.location.href= "http://localhost:44334/#container";
+        });
+
+        //pagination search
+        $("#page").on("change", function () {
+            report
+                .pages($(this).val())
+                .run()
+                .fail(function (e) { console.log(report.pages()); alert(e); });
+        });
+
+
+        //// EXPORT SECTION ////
+
+        //get report formats
+        var reportExports = v.report
+            .exportFormats
+            .concat(["json"]);
+
+        //Call buildControl to create a "<select>" element (all export options)
+        $select = buildControl("Export to: ", reportExports),
+            //Get the export button
+            $export_button = $("#export_button"),
+
+            //Config of the export button
+            $export_button.click(function () {
+
+                console.log($select.val());
+
+                report.export({
+                    //export options here
+                    outputFormat: $select.val(),
+                    //pages: "1-2" //exports all pages if not specified
+                }, function (link) {
+                    var url = link.href ? link.href : link;
+                    window.location.href = url;
+                }, function (error) {
+                    console.log(error);
+                });
+            });
     }
 
-    //// FEATURES BAR CODE ////
+    /*
+    //// CONFIGURE REPORT SECTION ////
+    report = v.report({
+        resource: current_resource,
+        container: "#container",
+        //uncomment to change default behaviour
+        //scale: "width",
+        //scale: "height",
+        //scale: 1,
+        scale: "container",
+
+        success: function () {
+            export_button.disabled = false;
+        },
+
+        error: function (error) {
+            export_button.disabled = true;
+            console.log(error);
+        }
+    });
+    
+    //// CONFIGURE INPUT CONTROLS SECTION ////
+    inputControls = v.inputControls({
+        resource: current_resource,//"/L4_logistics/Conception/rapports_test/test/test_mongodb/adaptative_mongodb"
+        container: "#ic",
+        events: {
+            change: function (params, error) {
+                if (!error) {
+                    export_button.disabled = false;
+                    report.params(params).run();
+                }
+            }
+        }
+    });
 
     //// PAGINATION SECTION ////
-
+    
     //previous pagination
     $("#previousPage").click(function () {
         var currentPage = report.pages() || 1;
@@ -256,11 +375,6 @@ visualize(function (v) {
         report
             .pages(--currentPage)
             .run()
-            .done(function (ok) {
-                console.log("ok change page");
-                //update page num
-                $("#page_label").html("page " + currentPage + " :");
-            })
             .fail(function (err) { alert(err); });
     });
 
@@ -271,110 +385,17 @@ visualize(function (v) {
         report
             .pages(++currentPage)
             .run()
-            .done(function (ok) {
-                console.log("ok change page");
-                //update page num
-                $("#page_label").html("page " + currentPage + " :");
-            })
             .fail(function (err) { alert(err); });
     });
 
     //pagination search
     $("#page").on("change", function () {
-        //get user's custom input value
-        var value = $(this).val();
         report
-            .pages(value)
-            .run()
-            .done(function (ok) {
-                console.log("ok change page");
-                //update page num
-                $("#page_label").html("page " + value + " :");
-                $('#page').val("");
-            })
-            .fail(function (e) { console.log(report.pages()); alert(e); });
-    });
-
-    //// ZOOM SECTION ////
-
-    //zoom +
-    $("#zoom_plus").click(function () {
-        var currentPage = report.pages() || 1;
-
-        console.log()
-
-        //change container size
-        var current_height_zoomed = document.getElementById("container").offsetHeight + 50;
-        console.log("CURRENT HEIGHT = " + current_height_zoomed)
-
-        //if zoom is too high, fix a limit
-        if (current_height_zoomed > 1440) {
-            current_height_zoomed = 1440;
-        }
-
-        $("#container").css("height", current_height_zoomed + "px");
-
-        //update % label value
-        $("#zoom_custom_label").html("Zoom (" + Math.floor((current_height_zoomed / 700) * 100) + "%) :");
-        
-
-        report
-            .pages(currentPage)
-            .run()
-            .fail(function (err) { alert(err); });
-
-    });
-
-    //zoom -
-    $("#zoom_minus").click(function () {
-        var currentPage = report.pages() || 1;
-
-        //change container size
-        var current_height_dezoomed = document.getElementById("container").offsetHeight - 50;
-        console.log("CURRRRR HEIGHT = " + current_height_dezoomed);
-
-        //if zoom is too low, fix a limit
-        if (current_height_dezoomed < 180) {
-            current_height_dezoomed = 180;
-        }
-
-        $("#container").css("height", current_height_dezoomed + "px");
-
-        //update % level value
-        $("#zoom_custom_label").html("Zoom (" + Math.floor((current_height_dezoomed / 700) * 100) + "%) :");
-
-        report
-            .pages(currentPage)
-            .run()
-            .fail(function (err) { alert(err); });
-
-    });
-
-    //custom zoom
-    $("#zoom_custom").on("change", function () {
-        var currentPage = report.pages() || 1;
-        //user input value
-        var value = $(this).val();
-
-        if (value < 25 || value > 200) {
-            alert("Veuillez entrer une valeur comprise entre 25 et 200");
-            value = 700;
-        } else {
-            value = (value / 100) * 700;
-        }
-
-        console.log("CUSTOM ZOOM : " + value);
-        $("#container").css("height", value + "px");
-
-        //update % level value and clear custom input
-        $("#zoom_custom_label").html("Zoom (" + Math.floor((value / 700) * 100) + "%) :");
-        $('#zoom_custom').val("");
-
-        report
-            .pages(currentPage)
+            .pages($(this).val())
             .run()
             .fail(function (e) { console.log(report.pages()); alert(e); });
     });
+
 
     //// EXPORT SECTION ////
 
@@ -384,27 +405,28 @@ visualize(function (v) {
         .concat(["json"]);
 
     //Call buildControl to create a "<select>" element (all export options)
-    $select = buildControl("", reportExports), //Export to was used here before
-    //Get the export button
-    $export_button = $("#export_button"),
+    $select = buildControl("Export to: ", reportExports),
+        //Get the export button
+        $export_button = $("#export_button"),
 
-    //Config of the export button
-    $export_button.click(function () {
+        //Config of the export button
+        $export_button.click(function () {
 
-        console.log($select.val());
+            console.log($select.val());
 
-        report.export({
-            //export options here
-            outputFormat: $select.val(),
-            //pages: "1-2" //exports all pages if not specified
-        }, function (link) {
-            var url = link.href ? link.href : link;
-            window.location.href = url;
-        }, function (error) {
-            console.log(error);
+            report.export({
+                //export options here
+                outputFormat: $select.val(),
+                //pages: "1-2" //exports all pages if not specified
+            }, function (link) {
+                var url = link.href ? link.href : link;
+                window.location.href = url;
+            }, function (error) {
+                console.log(error);
+            });
         });
-    });
-
+        */
+    
     //when the user choose an element in the select resource control, change the current resource
     $("#resource_selection").on("change", function () {
         current_resource = $("#resource_selection").val();
@@ -413,11 +435,11 @@ visualize(function (v) {
 
         if (current_resource_type == "dashboard") {
             console.log("dashboard rendering");
-            hideOrShowReportHTMLElements(true);
             dashboard = v.dashboard({
                 resource: current_resource,
                 container: "#dashboard_container",
                 success: function () {
+                    hideOrShowReportHTMLElements(true);
                     export_button_disabled = false;
                 },
                 error: function (error) {
@@ -426,33 +448,17 @@ visualize(function (v) {
                 }
             });
         } else {
-            console.log("report rendering")
             //render report from provided resource
-            hideOrShowReportHTMLElements(false);
             report = v.report({
                 resource: current_resource,
                 container: "#container",
-                //scale on height to update container size later
-                //multiple scale options => (width | height | number : 1 - 2 - 3 | container)
-                scale: "height",
-                scrollToTop: true,
-                events: {
-                    beforeRender: function (el) {
-                        console.log("------BEFORE RENDERING");
-                    },
-                    reportCompleted: function (status) {
-                        console.log("----------Report status: " + status + "!");
-                        if (status == "ready") {
-                            //display report features
-                            $("#hide_fix_bar").css("display", "block");
-                        } else {
-                            //if everything is ok, display report features
-                            $("#hide_fix_bar").css("display", "none");
-                        }
-                    }
-                },
-
+                //uncomment to change default behaviour
+                //scale: "width",
+                //scale: "height",
+                //scale: 1,
+                scale: "container",
                 success: function () {
+                    hideOrShowReportHTMLElements(false);
                     export_button.disabled = false;
                 },
 
@@ -464,19 +470,17 @@ visualize(function (v) {
 
             /// input controls section ///
             inputControls = v.inputControls({
-                resource: current_resource,
+                resource: current_resource,//"/L4_logistics/Conception/rapports_test/test/test_mongodb/adaptative_mongodb"
                 container: "#ic",
                 events: {
                     change: function (params, error) {
                         if (!error) {
                             export_button.disabled = false;
-                            $("#hide_fix_bar").css("display", "none");
                             report.params(params).run();
                         }
                     }
                 }
             });
-
         }
     });
 

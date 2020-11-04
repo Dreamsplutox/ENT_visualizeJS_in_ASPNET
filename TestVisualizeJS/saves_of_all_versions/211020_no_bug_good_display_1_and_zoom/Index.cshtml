@@ -1,0 +1,78 @@
+﻿@model TestVisualizeJS.Models.VisiteurWeb
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+    <script src="http://srvreporting-01:8080/jasperserver-pro/client/visualize.js"></script>
+    <!-- Get ViewBag data and transfer it to visualize.js-->
+    <script>
+        var folder_choice_var = '@(ViewBag.folder_choice)';
+        var first_resource_uri_var = '@(ViewBag.first_resource_uri)';
+        var first_resource_type_var = '@(ViewBag.first_resource_type)';
+    </script>
+    <script type="text/javascript" src="~/Content/VisualizeConfig.js"></script>
+</head>
+<body>
+    <div class="container col-sm-12 border">
+        <h3>Test de visualize.js dans une page ASP.NET</h3>
+        <!--<h4>Affichage dossiers</h4>-->
+        <label id="label_resource_selection" for="resource_selection"></label>
+        <select id="resource_selection"></select>
+       
+        <!--<h4>Affichage de la ressource</h4>-->
+        <div class="row col-sm-12" id="report_bootstrap_div">
+            <div class="col-sm-3 border border-primary" id="report_controls_div">
+                <div id="report_ic">
+                    <br />
+                    <h5>Contrôles d'entrées</h5>
+                    <div id="ic" style="height:">Loading</div>
+                </div>
+                <br />
+                <!--<h5 id="resource_title">Pagination et export</h5>-->
+                <div id="report_features">
+                    <h5 id="resource_title">Pagination et export</h5>
+                    <div class="row">
+                        <button id="export_button" style="margin-left:15px;" disabled>Export</button>
+                    </div>
+                    <br />
+                    <button id="previousPage">Previous Page</button>
+                    <button id="nextPage">Next Page</button>
+                    <br />
+                    <br />
+                    <label for="page">Find page :</label>
+                    <input type="text" id="page" />
+                    <br />
+                    <br />
+                    <label id="zoom_custom_label" for="zoom_custom">Zoom (100%) :</label>
+                    <input type="text" id="zoom_custom" style="width:100px;" />
+                    <button id="zoom_plus">+</button>
+                    <button id="zoom_minus">-</button>
+                  
+
+                </div>
+            </div>
+            <div id="container" class="content col-sm-9" style="border-right:1px solid black;
+                border-bottom:1px solid black; border-top:1px solid black; height:720px;">
+            </div>
+        </div>
+        <div id="dashboard_container" style="height:720px;"></div>
+    </div>
+</body>
+
+<!--<script type="text/javascript" src="~/Content/VisualizeConfig.js"></script>-->
+</html>
+
