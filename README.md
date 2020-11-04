@@ -38,7 +38,7 @@ De nombreux exemples d'utilisation de visualize.js sont disponibles sur [I'm an 
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG1.png "Img_1")
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG2.png "Img_2")
 
-### I - Afficher un rapport avec une page ASP.NET
+### 1 - Afficher un rapport avec une page ASP.NET
 Pour afficher un rapport dans un page ASP.NET avec visualize.js, il suffit d'avoir à disposition une vue et un fichier javascript.
 
 Il est alors facile de tester les différentes fonctionnalités de visualize.js en naviguant entre les différents "fiddle" du github pour s'inspirer d'exemples déjà existants.
@@ -122,6 +122,22 @@ Rendu :
 <br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG11.png "Img_11")
 
+### Zoom (-, + et personnalisé)
+
+Code HTML :
+3 boutons différents : Zoom- , Zoom+ et Zoom personnalisé
+<br>
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG11A.png "Img_11A")
+
+
+Code JS :
+modification de la taille du container et rechargement du rapport
+<br>
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG12A.png "Img_12A")
+
+Même procédé pour le zoom personnalisé (en prenant en compte la valeur entrée par l'utilisateur)
+<br>
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG13A.png "Img_13A")
 
 #### Export (format pdf, csv, json, ...)
 
@@ -158,7 +174,10 @@ Rendu :
 **Exemple d'affichage final après avoir inclus ces fonctionnalités :** 
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG20.png "Img_20")
 
-### II - Afficher le contenu d'un dossier du serveur Jasper 
+PS : Des modifications ont depuis été effectuées pour avoir un meilleur visuel, voici un aperçu :
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG20A.png "Img_20A")
+
+### 2 - Afficher le contenu d'un dossier du serveur Jasper 
 Dans la partie Javascript, on doit utiliser **"resourcesSearch"** pour récupérer toutes les ressources présentes à un emplacement précis du serveur, on peut filtrer les éléments récupérer par types ([I'm an inline-style link with title](https://community.jaspersoft.com/wiki/visualizejs-api-notes-and-samples-resourcessearch "liste des types")).
 Extrait de [I'm an inline-style link with title](https://community.jaspersoft.com/wiki/visualizejs-search-dashboards-reports-and-other-resources-repository-folder-and-its-subfolders "la documentation Jaspersoft community") : 
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG21.png "Img_21")
@@ -188,6 +207,30 @@ sélectionné change, la fonction  "on change" se déclenche et un nouveau rappo
 
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG28.png "Img_28")
 
-### III - Améliorations possibles au niveau de la sécurité
+### 3 - Améliorations possibles au niveau de la sécurité
 Il est possible d'améliorer le niveau de sécurité de visualize.js en transmettant les informations de connexion à l'aide d'un token SSO (créé par eactive directory par exemple)
 Plus d'informations sont disponibles dans [I'm an inline-style link with title](https://community.jaspersoft.com/documentation/tibco-jasperreports-server-visualizejs-guide/v780/api-reference-login-and-logout "cette documentation officielle").
+
+Pour obtenir un minimum de sécurité dans notre application ASP.NET, il est toujours possible d'intégrer une authentification basique, pour ce faire, il faut :
+
+#### A
+Créer un formulaire de connexion dans la vue, cacher tous les visuels tant que les informations de connexion sont incorrectes (mettre des "display : none" sur les "div" concernées) :
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG29.png "Img_29")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG30.png "Img_30")
+
+#### B
+Récupérer les informations de connexion dans notre controller, si elles sont correctes, récupérer la première ressource du dossier préciser en paramètre dans le code
+
++ transmettre des informations au javascript (dont les identifiants)
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG31.png "Img_31")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG32.png "Img_32")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG33.png "Img_33")
+
+#### C
+Activer l'affichage des éléments quand les données sont valides dans le code JS (visualize.js) :
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG34.png "Img_34")
+
+#### D
+Rendu :
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG35.png "Img_35")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG36.png "Img_36")
