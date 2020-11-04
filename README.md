@@ -29,11 +29,11 @@ Les ressources du serveur JasperReports peuvent être utilisées dans nos propre
 
 En plus des Iframes et de l'API REST qui ont été traités dans les documentations précédents, il existe une autre méthode pour incorporer les fonctionnalités du serveur Jasper dans nos applications Web : **Visualize.js**
 
-**Visualize.js** est un framework javascript créé spécialement pour intégrer des rapports, tableaux de bords, analyses ... Jasper dans des applications web ([I'm an inline-style link with title](https://community.jaspersoft.com/documentation/tibco-jasperreports-server-visualizejs-guide/v780/api-reference-visualizejs "lien vers la documentation officielle"))
+**Visualize.js** est un framework javascript créé spécialement pour intégrer des rapports, tableaux de bords, analyses ... Jasper dans des applications web ([lien vers la documentation officielle](https://community.jaspersoft.com/documentation/tibco-jasperreports-server-visualizejs-guide/v780/api-reference-visualizejs "lien vers la documentation officielle"))
 
 
 
-De nombreux exemples d'utilisation de visualize.js sont disponibles sur [I'm an inline-style link with title](https://github.com/tibcosoftware/JS-visualize "ce github"), ces exemples sont directement manipulables dans des JSfiddle (HTML + CSS + JS interactifs, disponibles en live sur le web) :
+De nombreux exemples d'utilisation de visualize.js sont disponibles sur [ce github](https://github.com/tibcosoftware/JS-visualize "ce github"), ces exemples sont directement manipulables dans des JSfiddle (HTML + CSS + JS interactifs, disponibles en live sur le web) :
 
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG1.png "Img_1")
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG2.png "Img_2")
@@ -122,7 +122,7 @@ Rendu :
 <br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG11.png "Img_11")
 
-### Zoom (-, + et personnalisé)
+#### Zoom (-, + et personnalisé)
 
 Code HTML :
 3 boutons différents : Zoom- , Zoom+ et Zoom personnalisé
@@ -178,8 +178,8 @@ PS : Des modifications ont depuis été effectuées pour avoir un meilleur visue
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG20A.png "Img_20A")
 
 ### 2 - Afficher le contenu d'un dossier du serveur Jasper 
-Dans la partie Javascript, on doit utiliser **"resourcesSearch"** pour récupérer toutes les ressources présentes à un emplacement précis du serveur, on peut filtrer les éléments récupérer par types ([I'm an inline-style link with title](https://community.jaspersoft.com/wiki/visualizejs-api-notes-and-samples-resourcessearch "liste des types")).
-Extrait de [I'm an inline-style link with title](https://community.jaspersoft.com/wiki/visualizejs-search-dashboards-reports-and-other-resources-repository-folder-and-its-subfolders "la documentation Jaspersoft community") : 
+Dans la partie Javascript, on doit utiliser **"resourcesSearch"** pour récupérer toutes les ressources présentes à un emplacement précis du serveur, on peut filtrer les éléments récupérer par types ([liste des types](https://community.jaspersoft.com/wiki/visualizejs-api-notes-and-samples-resourcessearch "liste des types")).
+Extrait de [la documentation Jaspersoft community](https://community.jaspersoft.com/wiki/visualizejs-search-dashboards-reports-and-other-resources-repository-folder-and-its-subfolders "la documentation Jaspersoft community") : 
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG21.png "Img_21")
 
 Mais en utilisant cette méthode, les ressources ne seront pas récupérées dans le même ordre que celui du référentiel du serveur jasper.
