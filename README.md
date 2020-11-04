@@ -133,11 +133,11 @@ Code HTML :
 Code JS :
 modification de la taille du container et rechargement du rapport
 <br>
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG12A.png "Img_12A")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG11B.png "Img_11B")
 
 Même procédé pour le zoom personnalisé (en prenant en compte la valeur entrée par l'utilisateur)
 <br>
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG13A.png "Img_13A")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG11C.png "Img_11C")
 
 #### Export (format pdf, csv, json, ...)
 
@@ -209,16 +209,16 @@ sélectionné change, la fonction  "on change" se déclenche et un nouveau rappo
 
 ### 3 - Améliorations possibles au niveau de la sécurité
 Il est possible d'améliorer le niveau de sécurité de visualize.js en transmettant les informations de connexion à l'aide d'un token SSO (créé par eactive directory par exemple)
-Plus d'informations sont disponibles dans [I'm an inline-style link with title](https://community.jaspersoft.com/documentation/tibco-jasperreports-server-visualizejs-guide/v780/api-reference-login-and-logout "cette documentation officielle").
+Plus d'informations sont disponibles dans [cette documentation officielle](https://community.jaspersoft.com/documentation/tibco-jasperreports-server-visualizejs-guide/v780/api-reference-login-and-logout "cette documentation officielle").
 
 Pour obtenir un minimum de sécurité dans notre application ASP.NET, il est toujours possible d'intégrer une authentification basique, pour ce faire, il faut :
 
-#### A
+#### Etape A
 Créer un formulaire de connexion dans la vue, cacher tous les visuels tant que les informations de connexion sont incorrectes (mettre des "display : none" sur les "div" concernées) :
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG29.png "Img_29")
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG30.png "Img_30")
 
-#### B
+#### Etape B
 Récupérer les informations de connexion dans notre controller, si elles sont correctes, récupérer la première ressource du dossier préciser en paramètre dans le code
 
 + transmettre des informations au javascript (dont les identifiants)
@@ -226,11 +226,11 @@ Récupérer les informations de connexion dans notre controller, si elles sont c
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG32.png "Img_32")
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG33.png "Img_33")
 
-#### C
+#### Etape C
 Activer l'affichage des éléments quand les données sont valides dans le code JS (visualize.js) :
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG34.png "Img_34")
 
-#### D
+#### Etape D
 Rendu :
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG35.png "Img_35")
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/IMG36.png "Img_36")
