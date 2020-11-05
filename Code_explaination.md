@@ -24,7 +24,7 @@ La partie Vue contient tous les éléments qui seront affichés, elle permet aus
 <b>Imports nécessaires (bootstrap, jquery et visualize.js) + récupération des données du controller pour envoi vers notre javascript :</b>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG4.png "cod_img4")
 
-<b>Formulaire de connexion :</b>
+<b>Formulaire de connexion :</b><br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG5.png "cod_img5")
 
 <b>Selection d'une ressource (parmi celles générées dans notre javascript) :</b>
@@ -41,18 +41,18 @@ La partie Vue contient tous les éléments qui seront affichés, elle permet aus
 
 La partie javascript est divisée en plusieurs parties, une partie qui contient de nombreuses fonctions qui seront utilisées par la suite :
 
-<b>fonction "getFolderColor" :</b>
+<b>fonction "getFolderColor" :</b><br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG10.png "cod_img10")
 
 
-<b>fonction buildResourceSelectControl</b>
+<b>fonction buildResourceSelectControl :</b>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG11A.png "cod_img11a")
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG11B.png "cod_img11b")
 
-<b>fonction hideOrShowReportHTMLElements</b>
+<b>fonction hideOrShowReportHTMLElements :</b><br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG12.png "cod_img12")
 
-<b>fonction buildControl</b>
+<b>fonction buildControl</b><br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG13.png "cod_img13")
 
 une partie pour récupérer les données de la vue dans des variables :
@@ -61,13 +61,13 @@ une partie pour récupérer les données de la vue dans des variables :
 
 et une autre partie pour interagir avec visualize.js et configurer les ressources du serveur Jasper (récupérer les contrôles d'entrées, permettre la navigation entre les pages, ...) :
 
-<b>authentification :</b>
+<b>authentification :</b><br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG15.png "cod_img15")
-<b>récupération de la liste des ressources :</b>
+<b>récupération de la liste des ressources :</b><br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG16.png "cod_img16")
-<b>le premier élement à afficher est un tableau de bord ? :</b>
+<b>le premier élement à afficher est un tableau de bord ? :</b><br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG17.png "cod_img17")
-<b>le premier élément à afficher est un rapport ? : </b>
+<b>le premier élément à afficher est un rapport ? : </b><br>
 #### configuration du rapport
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG18.png "cod_img18")
 
