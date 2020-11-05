@@ -62,11 +62,11 @@ une partie pour récupérer les données de la vue dans des variables :
 et une autre partie pour interagir avec visualize.js et configurer les ressources du serveur Jasper (récupérer les contrôles d'entrées, permettre la navigation entre les pages, ...) :
 
 <b>authentification :</b><br>
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG15.png "cod_img15")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG15.png "cod_img15")<br>
 <b>récupération de la liste des ressources :</b><br>
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG16.png "cod_img16")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG16.png "cod_img16")<br>
 <b>le premier élement à afficher est un tableau de bord ? :</b><br>
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG17.png "cod_img17")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG17.png "cod_img17")<br>
 <b>le premier élément à afficher est un rapport ? : </b><br>
 #### configuration du rapport
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG18.png "cod_img18")
