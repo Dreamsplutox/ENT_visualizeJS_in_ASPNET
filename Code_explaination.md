@@ -82,7 +82,7 @@ et une autre partie pour interagir avec visualize.js et configurer les ressource
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG21B.png "cod_img21b")
 #### export
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG22.png "cod_img22")<br>
-<b>modification de la ressource à afficher lorsqu'une option est sélectionnée :</b>
+<br><b>modification de la ressource à afficher lorsqu'une option est sélectionnée :</b>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG23A.png "cod_img23a")
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG23B.png "cod_img23b")
 
