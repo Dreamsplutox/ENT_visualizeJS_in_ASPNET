@@ -3,9 +3,29 @@ Application ASP.NET qui va intégrer les fonctionnalités de la suite BI Jaspers
 
 ## I - Mise en place de l'application ASP.NET
 
-Pour mettre en place cette application ASP.NET, vous devrez ouvrir le fichier .sln du dossier TestVisualizeJS avec visual studio : 
+Pour mettre en place cette application ASP.NET, vous devrez tout d'abord créer un nouveau projet de type " application web ASP.NET MVC" sur visual studio :
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/1_creer_proj.png "1_creer_proj")
 <br>
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/visualizeA.png "Img_A")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/2_creer_proj2.png "2_creer_proj2")
+<br>
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/3_creer_proj3.png "3_creer_proj3")
+
+Une fois le projet créé, vous devrez copier les différentes ressources présentes dans le dossier git "current_version" à l'intérieur de l'application ASP.NET :
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/4_copier_vue.png "4_copier_vue")
+<br>
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/5_copier_fichier_js.png "5_copier_fichier_js")
+<br>
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/6_copier_controller.png "6_copier_controller")
+<br>
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/7_copie_visiteurweb.png "7_copie_visiteurweb")
+
+
+Après avoir copié les différentes ressources, vous devrez modifier les routes dans RouteConfig et modifier les paramètres du projet pour le lancer en mode HTTP plutôt qu'HTTPS :
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/8_modif_routeconfig.png "8_modif_routeconfig")
+<br>
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/9_access_proprietes.png "9_access_proprietes")
+<br>
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/10_changement_url.png "10_changement_url")
 
 Vous devrez ensuite effectuer les modifications suivantes pour adapter l'application à votre propre serveur Jaspersoft :
 
@@ -20,6 +40,9 @@ Vous devrez ensuite effectuer les modifications suivantes pour adapter l'applica
 *Pour le fichier javascript (Content/VisualizeConfig.js) :*
 <br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/visualizeD.png "Img_D")
+
+L'application devrait ensuite fonctionner sans problème : 
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/11_appli_asp_ok.png "11_appli_asp_ok")
 
 ## II - Quelques explications sur le code
 

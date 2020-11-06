@@ -1,0 +1,129 @@
+﻿@model TestVisualizeJS.Models.VisiteurWeb
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+    <script src="http://srvreporting-01:8080/jasperserver-pro/client/visualize.js"></script>
+    <!-- Get ViewBag data and transfer it to visualize.js-->
+    <script>
+        var folder_choice_var = '@(ViewBag.folder_choice)';
+        var first_resource_uri_var = '@(ViewBag.first_resource_uri)';
+        var first_resource_type_var = '@(ViewBag.first_resource_type)';
+        var credentials = '@(ViewBag.credentials)';
+    </script>
+    <script type="text/javascript" src="~/Content/VisualizeConfig.js"></script>
+</head>
+<body>
+    <div class="container col-sm-12">
+        <h3 id="@ViewBag.first_resource_label">Test de visualize.js dans une page ASP.NET</h3>
+        <!-- Authentication div -->
+        <!--
+        <div class="row input-group col-sm-12 border">
+            <h5>Authentification</h5>
+            <label id="username_label" class="col-form-label offset-md-1" for="username">Username :</label>
+            &nbsp;
+            <input type="text" id="username" class="form-control form-control-xs col-lg-2" />
+
+            <label id="password_label" class="col-form-label offset-md-1" for="password">Password :</label>
+            &nbsp;
+            <input type="password" id="password" class="form-control form-control-xs col-lg-2" />
+        </div>
+        <br />
+        -->
+        <div id="authentication_jasper">
+            @using (Html.BeginForm("MyForm", "Visualize", FormMethod.Post))
+            {
+                <h5>Authentication Form</h5>
+                <p>Nom d'utilisateur Jasper</p>
+                @Html.TextBoxFor(model => model.Username)
+                <p>Mot de passe</p>
+                @Html.PasswordFor(model => model.Password)
+                <br />
+                <br />
+                <input type="submit" value="Valider" />
+            }
+        <br />
+        <p class="text-danger">@(ViewBag.error)</p>
+        </div>
+
+        <!--<h4>Affichage dossiers</h4>-->
+        <div id="folder_display" class="row input-group col-sm-12">
+            <label id="label_resource_selection" class="col-form-label" for="resource_selection" style="display:none;">Loading ...</label>
+            &nbsp;
+            <select id="resource_selection" class="custom-select form-control form-control-xs col-lg-3" style="display:none;"></select>
+        </div>
+        <br />
+        <!--<h4>Affichage de la ressource</h4>-->
+        <div class="container row col-sm-12" id="report_bootstrap_div" style="height:700px;">
+            <div class="col-sm-3 border border-primary" id="report_controls_div" style="display:none;">
+                <div id="report_ic">
+                    <br />
+                    <h5>Contrôles d'entrées</h5>
+                    <div id="ic" style="height:">Loading</div>
+                </div>
+                <br />
+                <!--<h5 id="resource_title">Pagination et export</h5>-->
+                <div id="loading_report_div" style="display:none;"><p>Loading ...</p></div>
+                <div id="report_features">
+                    <h5 id="resource_title">Pagination et export</h5>
+                    <div class="row input-group col-sm-12">
+                        <button id="export_button" class="btn offset-md-1" disabled>Export</button>
+                    </div>
+                    <br />
+                    <div class="row input-group col-sm-12">
+                        <button id="previousPage" class="btn"><b><</b></button>
+
+                        <label id="page_label" for="page" class="col-form-label offset-md-1">page 1 :</label>
+                        &nbsp;
+                        <input type="text" id="page" class="form-control col-lg-3" />
+
+                        <button id="nextPage" class="btn offset-md-1"><b>></b></button>
+                        <br />
+                        <br />
+                    </div>
+                    <div class="row input-group">
+                        <!--
+                        <label for="page" class="col-form-label" style="margin-left:15px;">page :</label>
+                        <input type="text" id="page" class="form-control" style="margin-left:15px;" />
+                        -->
+                    </div>
+                    <br />
+                    <br />
+                    <div class="row input-group col-sm-12">
+                        <button id="zoom_minus" class="btn"><b>-</b></button>
+
+                        <label id="zoom_custom_label" class="col-form-label offset-md-1" for="zoom_custom">Zoom 100% :</label>
+                        &nbsp;
+                        <input type="text" id="zoom_custom" class="form-control col-lg-3" />
+
+                        <button id="zoom_plus" class="btn offset-md-1"><b>+</b></button>
+                    </div>
+
+                </div>
+            </div>
+            <div id="container" class="col-sm-9">
+                <!--style="border-right:1px solid black;
+                border-top:1px solid black;">was 720 height-->
+            </div>
+        </div>
+        <div id="dashboard_container" style="height:700px;"></div>
+    </div>
+</body>
+
+<!--<script type="text/javascript" src="~/Content/VisualizeConfig.js"></script>-->
+</html>
+

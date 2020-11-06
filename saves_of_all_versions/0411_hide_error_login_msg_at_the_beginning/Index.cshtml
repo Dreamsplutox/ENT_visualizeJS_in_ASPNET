@@ -1,0 +1,122 @@
+﻿@model TestVisualizeJS.Models.VisiteurWeb
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Index</title>
+    <!-- Bootstrap CSS & JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+     <!-- Visualize -->
+    <script src="http://srvreporting-01:8080/jasperserver-pro/client/visualize.js"></script>
+    <!-- Get ViewBag data and transfer it to visualize.js-->
+    <script>
+        var folder_choice_var = '@(ViewBag.folder_choice)';
+        var first_resource_uri_var = '@(ViewBag.first_resource_uri)';
+        var first_resource_type_var = '@(ViewBag.first_resource_type)';
+        var credentials = '@(ViewBag.credentials)';
+    </script>
+    <script type="text/javascript" src="~/Content/VisualizeConfig.js"></script>
+</head>
+<body>
+    <div class="container col-sm-12">
+        <h3 id="@ViewBag.first_resource_label">Test de visualize.js dans une page ASP.NET</h3>
+        <!-- Authentication form -->
+        <div id="authentication_jasper">
+            @using (Html.BeginForm("MyForm", "Visualize", FormMethod.Post))
+            {
+                <h5>Authentication Form</h5>
+                <p>Nom d'utilisateur Jasper</p>
+                @Html.TextBoxFor(model => model.Username)
+                <p>Mot de passe</p>
+                @Html.PasswordFor(model => model.Password)
+                <br />
+                <br />
+                <input type="submit" value="Valider" />
+            }
+            <br />
+            <p class="text-danger">@(ViewBag.error)</p>
+        </div>
+
+        <!-- Resource selection div -->
+        <div id="folder_display" class="row input-group col-sm-12">
+            <label id="label_resource_selection" class="col-form-label" for="resource_selection" style="display:none;">Loading ...</label>
+            &nbsp;
+            <select id="resource_selection" class="custom-select form-control form-control-xs col-lg-3" style="display:none;"></select>
+        </div>
+        <br />
+
+        <!-- Modal for input controls -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modifier vos contrôles d'entrée</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="ic" style="height:">Loading</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Fixed feature bar -->
+        <div id="hide_fix_bar" style="display:none; position: -webkit-sticky; position: sticky; top: 0; z-index:10; background-color: white; margin-left:2px;">
+            <div class="row col-sm-12 border border-primary" align="center" id="features_fixed_bar">
+                <!-- Pagination section -->
+                <div id="pagination_feature" class="input-group col-sm-3" style="border-right: 1px solid black;">
+                    <button id="previousPage" class="btn"><b><</b></button>
+
+                    <label id="page_label" for="page" class="col-form-label offset-md-1">page 1 :</label>
+                    &nbsp;
+                    <input type="text" id="page" class="form-control col-lg-3" />
+
+                    <button id="nextPage" class="btn offset-md-1"><b>></b></button>
+                </div>
+                <!-- Zoom section -->
+                <div id="zoom_feature" class="input-group col-sm-3" style="border-right: 1px solid black;">
+                    <button id="zoom_minus" class="btn"><b>-</b></button>
+
+                    <label id="zoom_custom_label" class="col-form-label offset-md-1" for="zoom_custom">Zoom 100% :</label>
+                    &nbsp;
+                    <input type="text" id="zoom_custom" class="form-control col-lg-3" />
+
+                    <button id="zoom_plus" class="btn offset-md-1"><b>+</b></button>
+                </div>
+                <!-- Export section -->
+                <div id="export_feature" class="input-group col-sm-2 input-group-sm" style="border-right: 1px solid black;">
+                    <button id="export_button" class="btn offset-md-1" disabled>Export</button>
+                </div>
+                <!-- Input control section -->
+                <div id="input_control_feature" class="col-xs-4 col-sm-4" style="border-right: 1px solid black;">
+                    <!-- Button to trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Modifier les paramètres
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report layout container -->
+        <div id="container" class="col-xs-12" style="height:700px;"></div>
+        <!-- Dashboard layout container -->
+        <div id="dashboard_container" style="height:700px;"></div>
+    </div>
+</body>
+</html>
+
