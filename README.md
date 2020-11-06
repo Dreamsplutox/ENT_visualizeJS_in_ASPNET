@@ -10,12 +10,12 @@ Pour mettre en place cette application ASP.NET, vous devrez tout d'abord créer 
 <br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/3_creer_proj3.png "3_creer_proj3")
 
-Une fois le projet créé, vous devrez copier les différentes ressources présentes dans le dossier git "current_version" à l'intérieur de l'application ASP.NET :
+Une fois le projet créé, vous devrez copier les différentes ressources présentes dans le dossier git "current_version" à l'intérieur de l'application ASP.NET :<br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/4_copier_vue.png "4_copier_vue")
 <br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/5_copier_fichier_js.png "5_copier_fichier_js")
 <br>
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/6_copier_controller.png "6_copier_controller")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/6_copie_controller.png "6_copier_controller")
 <br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/7_copie_visiteurweb.png "7_copie_visiteurweb")
 
@@ -42,7 +42,7 @@ Vous devrez ensuite effectuer les modifications suivantes pour adapter l'applica
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/visualizeD.png "Img_D")
 
 L'application devrait ensuite fonctionner sans problème : 
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/11_appli_asp_ok.png "11_appli_asp_ok")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/11_aplli_asp_ok.png "11_aplli_asp_ok")
 
 ## II - Quelques explications sur le code
 
