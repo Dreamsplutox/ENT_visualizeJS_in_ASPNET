@@ -46,7 +46,6 @@ L'application devrait ensuite fonctionner sans problème :
 
 ## II - Quelques explications sur le code
 
-[récupérer étapes importantes]
 ### Introduction
 Les ressources du serveur JasperReports peuvent être utilisées dans nos propres applications grâce à certains outils mis à disposition par Jaspersoft.
 

@@ -4,7 +4,7 @@
 
 La partie Model contient une classe "VisiteurWeb" qui représente l'utilisateur de l'application ASP.NET.
 
-C'est dans cette classe que seront stockés les indentifiants de connexion Jasper :
+C'est dans cette classe que seront stockés les identifiants de connexion Jasper :
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG1.png "cod_img1")
 
 
