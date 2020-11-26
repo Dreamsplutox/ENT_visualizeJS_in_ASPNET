@@ -15,30 +15,13 @@ namespace TestVisualizeJS.Controllers.Visualize
 {
     public class VisualizeController : Controller
     {
-        //username and password as global var to use them in functions
-        //private string username_glob { get; set; }
-        //private string password_glob { get; set; }
-
         // GET: Visualize
-        public ActionResult Index(string username = "", string password = "", bool login_form_completed = false, string folder_choice = "/L4_logistics/Conception/rapports_test/test/test_mongodb")
+        public ActionResult Index(string username = "", string password = "", bool login_form_completed = false)
         {
             VisiteurWeb client = new VisiteurWeb();
             String nom = "Arnaud";
             client.Nom = nom;
-            client.Username = username;
-            client.Password = password;
             ViewData["visiteur_name"] = nom;
-
-
-            //If folder_choidce == "", the user choose an unauthorized folder, change it to default and set an error
-            bool folder_choice_error = false; 
-            if(folder_choice == "nothing")
-            {
-                folder_choice = "/L4_logistics/Conception/rapports_test/test/test_mongodb";
-                folder_choice_error = true;
-                
-            }
-
 
             //if the login form isn't completed, return to classic login form page
             if (login_form_completed == false)
@@ -48,13 +31,12 @@ namespace TestVisualizeJS.Controllers.Visualize
                 ViewBag.first_resource_uri = "";
                 ViewBag.first_resource_type = "";
                 ViewBag.error = "";
-                ViewBag.folder_error = "";
                 ViewBag.credentials = ":";
                 return View("Index", client);
             }
 
             //// GET URI OF FIRST JASPER RESSOURCE FOR OUR FOLDER ////
-            //var folder_choice = "/L4_logistics/Conception/rapports_test/test/test_mongodb";//"/L4_logistics/Conception/rapports_test/test/test_mongodb/sous_dossier_num_2/sous_sous_dossier_test/so_so_so_dossier/so_so_so_so_dossier";
+            var folder_choice = "/L4_logistics/Conception/rapports_test/test/test_mongodb";//"/L4_logistics/Conception/rapports_test/test/test_mongodb/sous_dossier_num_2/sous_sous_dossier_test/so_so_so_dossier/so_so_so_so_dossier";
 
             // ideas to set the folder choice var based on the role of the user ==> 
             //1) build query like "URL_rest_list_reports" ==> URL_rest_list_user_roles = "http://srvreporting-01:8080/jasperserver-pro/rest_v2/roles?user=" + username
@@ -91,7 +73,6 @@ namespace TestVisualizeJS.Controllers.Visualize
                 ViewBag.first_resource_type = "";
                 ViewBag.error = "Erreur, mauvaise combinaison (nom d'utilisateur / mot de passe)";
                 ViewBag.credentials = credentials_jasper;
-                ViewBag.folder_error = "";
                 return View("Index", client);
             }
 
@@ -124,14 +105,6 @@ namespace TestVisualizeJS.Controllers.Visualize
                     ViewBag.first_resource_uri = uriList[i].InnerXml;
                     ViewBag.first_resource_type = resourceTypeList[i].InnerXml;
                     ViewBag.error = "";
-                    if (folder_choice_error == true)
-                    {
-                        ViewBag.folder_error = "Vous n avez pas les autorisations necessaires pour choisir ce dossier source, le dossier source par défaut sera utilisé";
-                    }
-                    else
-                    {
-                        ViewBag.folder_error = "";
-                    }
                     ViewBag.credentials = HttpUtility.UrlEncode(username) + ":" + HttpUtility.UrlEncode(password);
                     break;
                 }
@@ -148,32 +121,7 @@ namespace TestVisualizeJS.Controllers.Visualize
             String nom = "Arnaud";
             client.Nom = nom;
 
-            //username_glob = formData.Username;
-            //password_glob = formData.Password;
-
             return RedirectToAction("Index", "Visualize", new { username = formData.Username, password = formData.Password, login_form_completed = true });
-        }
-
-        public ActionResult myUpdateForm(Models.VisiteurWeb formData)
-        {
-            VisiteurWeb client = new VisiteurWeb();
-            String nom = "Arnaud";
-            client.Nom = nom;
-
-            string folder_is_valid = "nothing";
-
-            //Check if folder_choice is autorized, if not we will send "" to the ActionResult
-            string[] autorized_folders = { "/L4_logistics/Conception/rapports_test/test/test_mongodb", "/L4_logistics/Conception/rapports_test/copy_reports" };
-            foreach (string x in autorized_folders)
-            {
-                if(x == formData.FolderChoice)
-                {
-                    folder_is_valid = formData.FolderChoice;
-                }
-            }
-
-            
-            return RedirectToAction("Index", "Visualize", new { username = formData.Username, password = formData.Password, login_form_completed = true, folder_choice = folder_is_valid });
         }
    
     }

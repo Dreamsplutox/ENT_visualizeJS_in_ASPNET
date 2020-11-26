@@ -127,8 +127,7 @@ function buildControl(name, options) {
 
 var current_resource = first_resource_uri_var;
 var current_resource_type = first_resource_type_var;
-var folder_choice = folder_choice_var;
-var folder_error = folder_error;
+var folder_choice = folder_choice_var
 var current_credentials = credentials.split(":");
 var totalPages = 0;
 console.log("current res : " + current_resource);
@@ -153,14 +152,8 @@ visualize(function (v) {
         //show resource selection
         $("#resource_selection").css("display", "block");
         $("#label_resource_selection").css("display", "block");
-        $("#update_modal_btn").css("display", "block");
         //hide auth
         $("#authentication_jasper").css("display", "none");
-    }
-
-    //display alert message if folder_choice was unauthorized
-    if (folder_error != "") {
-        alert(folder_error);
     }
 
     //// GET LIST OF RESOURCES (INSIDE FOLDER) SECTION ////

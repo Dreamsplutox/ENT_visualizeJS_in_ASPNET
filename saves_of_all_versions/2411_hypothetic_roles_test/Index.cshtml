@@ -27,7 +27,6 @@
         var first_resource_uri_var = '@(ViewBag.first_resource_uri)';
         var first_resource_type_var = '@(ViewBag.first_resource_type)';
         var credentials = '@(ViewBag.credentials)';
-        var folder_error = '@(ViewBag.folder_error)';
     </script>
     <script type="text/javascript" src="~/Content/VisualizeConfig.js"></script>
     <style>
@@ -71,55 +70,13 @@
             <p class="text-danger">@(ViewBag.error)</p>
         </div>
 
-
-        <!-- Modal for resource selection update -->
-        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="updateModalLabel">Modifier le dossier source</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p><i>! Si la modification est interdite, un message d'erreur apparaîtra !</i></p>
-                        <div id="update_resource_form">
-                            @using (Html.BeginForm("MyUpdateForm", "Visualize", FormMethod.Post))
-                            {
-                            <div class="form-group">
-                                <label class="col-form-label" for="input_folder_choice">Chemin d'accès au dossier (en entier)</label>
-                                @Html.TextBoxFor(model => model.FolderChoice, new { @id = "input_folder_choice", @class = "form-control" })
-                                @Html.TextBoxFor(model => model.Username, new { @id = "input_username", @class = "form-control", @value = Model.Username, @type = "hidden" })
-                                @Html.TextBoxFor(model => model.Password, new { @id = "input_password", @class = "form-control", @value = Model.Username, @type = "hidden" })
-
-                            </div>
-                                <input type="submit" class="btn btn-secondary col-lg-12" value="Valider" />
-                            }
-                            <br />
-                            <!--<p class="text-danger">@(ViewBag.error)</p>-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Resource selection div -->
         <div id="folder_display" class="row input-group col-sm-12" style="margin-top:8px;">
             <label id="label_resource_selection" class="col-form-label" for="resource_selection" style="display:none;">Loading ...</label>
             &nbsp;
             <select id="resource_selection" class="custom-select form-control form-control-xs col-lg-3" style="display:none;"></select>
-
-            <!-- resource selection update section -->
-            <div id="iput_update_resource_selection" class="col-xs-4 col-sm-4 d-flex">
-                <!-- Button to trigger modal -->
-                <button id="update_modal_btn" type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateModal" style="display:none;">
-                    Modifier le dossier source
-                </button>
-            </div>
-
         </div>
-
+        
 
         <!-- Modal for input controls -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
