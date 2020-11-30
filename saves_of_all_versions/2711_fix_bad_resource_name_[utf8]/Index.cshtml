@@ -92,6 +92,9 @@
                                 <div class="form-group">
                                     <label class="col-form-label" for="input_folder_choice">Chemin d'accès au dossier (en entier)</label>
                                     @Html.TextBoxFor(model => model.FolderChoice, new { @id = "input_folder_choice", @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.Username, new { @id = "input_username", @class = "form-control", @value = Model.Username, @type = "hidden" })
+                                    @Html.TextBoxFor(model => model.Password, new { @id = "input_password", @class = "form-control", @value = Model.Username, @type = "hidden" })
+
                                 </div>
                                 <input type="submit" class="btn btn-secondary col-lg-12" value="Valider" />
                             }
@@ -107,7 +110,7 @@
         <div id="folder_display" class="row input-group col-sm-12" style="margin-top:8px;">
             <label id="label_resource_selection" class="col-form-label" for="resource_selection" style="display:none;">Loading ...</label>
             &nbsp;
-            <select id="resource_selection" class="custom-select form-control form-control-xs col-sm-3" style="display:none;"></select>
+            <select id="resource_selection" class="custom-select form-control form-control-xs col-lg-3" style="display:none;"></select>
 
             <!-- resource selection update section -->
             <div id="iput_update_resource_selection" class="col-xs-4 col-sm-4 d-flex">
@@ -115,13 +118,6 @@
                 <button id="update_modal_btn" type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateModal" style="display:none;">
                     Modifier le dossier source
                 </button>
-            </div>
-            <div class="col-sm-1"></div>
-            <div id="disconnection" class="col-sm-2">
-                @using (Html.BeginForm("MyDisconnectForm", "Visualize", FormMethod.Post))
-                {
-                    <input id="disconnection_btn" type="submit" class="btn btn-danger col-lg-12" value="déconnexion" style="display:none;"/>
-                }
             </div>
 
         </div>

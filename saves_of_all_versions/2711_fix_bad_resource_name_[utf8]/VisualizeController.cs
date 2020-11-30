@@ -15,37 +15,42 @@ namespace TestVisualizeJS.Controllers.Visualize
 {
     public class VisualizeController : Controller
     {
+        //username and password as global var to use them in functions
+        //private string username_glob { get; set; }
+        //private string password_glob { get; set; }
+
         // GET: Visualize
-        public ActionResult Index(string folder_choice = "/L4_logistics/Conception/rapports_test/test/test_mongodb")
+        public ActionResult Index(string username = "", string password = "", bool login_form_completed = false, string folder_choice = "/L4_logistics/Conception/rapports_test/test/test_mongodb")
         {
-            VisiteurWeb client;
-            //Test session
-            if (System.Web.HttpContext.Current.Session["test"] != null)
+            VisiteurWeb client = new VisiteurWeb();
+            String nom = "Arnaud";
+            client.Nom = nom;
+            client.Username = username;
+            client.Password = password;
+            ViewData["visiteur_name"] = nom;
+
+
+            //If folder_choidce == "", the user choose an unauthorized folder, change it to default and set an error
+            bool folder_choice_error = false; 
+            if(folder_choice == "nothing")
             {
-                client = (VisiteurWeb)Session["test"];
-                ViewBag.session_test = client.Username;
+                folder_choice = "/L4_logistics/Conception/rapports_test/test/test_mongodb";
+                folder_choice_error = true;
+                
             }
-            else
+
+
+            //if the login form isn't completed, return to classic login form page
+            if (login_form_completed == false)
             {
-                //User haven't complete the authentication form, redirect to it
+                ViewBag.folder_choice = "";
+                ViewBag.first_resource_label = "";
+                ViewBag.first_resource_uri = "";
+                ViewBag.first_resource_type = "";
+                ViewBag.error = "";
+                ViewBag.folder_error = "";
                 ViewBag.credentials = ":";
-                return View("Index");
-            }
-
-            //If folder_choidce == "nothing", the user choose an unauthorized folder, change it to default and set an error
-
-            bool folder_choice_error = false;
-            if (System.Web.HttpContext.Current.Session["folder_is_valid"] != null)
-            {
-                if (Session["folder_is_valid"].ToString() == "nothing")
-                {
-                    folder_choice = "/L4_logistics/Conception/rapports_test/test/test_mongodb";
-                    folder_choice_error = true;
-                }
-                else
-                {
-                    folder_choice = Session["folder_is_valid"].ToString();
-                }
+                return View("Index", client);
             }
 
             //// GET URI OF FIRST JASPER RESSOURCE FOR OUR FOLDER ////
@@ -58,7 +63,7 @@ namespace TestVisualizeJS.Controllers.Visualize
             //example of array_roles ==  ["ROLE_USER" ==> "/public/prospect_reports", "ROLE_ADMIN" ==> "/L4_logistics/rapports_sensibles"]
 
             // Credentials
-            var credentials_jasper = client.Username + ":" + client.Password;
+            var credentials_jasper = username + ":" + password;
 
             // List all reports of a folder X (here conception/rapports_test/test/test_mongodb) of the repository
             String encoded_rest_list_reports = System.Convert.ToBase64String(System.Text.Encoding.
@@ -129,7 +134,7 @@ namespace TestVisualizeJS.Controllers.Visualize
                     {
                         ViewBag.folder_error = "";
                     }
-                    ViewBag.credentials = HttpUtility.UrlEncode(client.Username) + ":" + HttpUtility.UrlEncode(client.Password);
+                    ViewBag.credentials = HttpUtility.UrlEncode(username) + ":" + HttpUtility.UrlEncode(password);
                     break;
                 }
             }
@@ -139,17 +144,16 @@ namespace TestVisualizeJS.Controllers.Visualize
         }
 
 
-        //Connection Form
         public ActionResult myForm(Models.VisiteurWeb formData)
         {
             VisiteurWeb client = new VisiteurWeb();
+            String nom = "Arnaud";
+            client.Nom = nom;
 
-            client.Username = formData.Username;
-            client.Password = formData.Password;
+            //username_glob = formData.Username;
+            //password_glob = formData.Password;
 
-            Session["test"] = client;
-
-            return RedirectToAction("Index", "Visualize");
+            return RedirectToAction("Index", "Visualize", new { username = formData.Username, password = formData.Password, login_form_completed = true });
         }
 
         public ActionResult myUpdateForm(Models.VisiteurWeb formData)
@@ -164,30 +168,14 @@ namespace TestVisualizeJS.Controllers.Visualize
             string[] autorized_folders = { "/L4_logistics/Conception/rapports_test/test/test_mongodb", "/L4_logistics/Conception/rapports_test/copy_reports" };
             foreach (string x in autorized_folders)
             {
-                if (x == formData.FolderChoice)
+                if(x == formData.FolderChoice)
                 {
                     folder_is_valid = formData.FolderChoice;
-                    Session["folder_is_valid"] = folder_is_valid;
-                    return RedirectToAction("Index", "Visualize");
                 }
             }
 
-            Session["folder_is_valid"] = folder_is_valid;
-
-            return RedirectToAction("Index", "Visualize");
-        }
-
-        public ActionResult myDisconnectForm()
-        {
-
-            //Delete all session variables
-            Session.Remove("test");
-            if (System.Web.HttpContext.Current.Session["folder_is_valid"] != null)
-            {
-                Session.Remove("folder_is_valid");
-            }
-               
-            return RedirectToAction("Index", "Visualize");
+            
+            return RedirectToAction("Index", "Visualize", new { username = formData.Username, password = formData.Password, login_form_completed = true, folder_choice = folder_is_valid });
         }
    
     }

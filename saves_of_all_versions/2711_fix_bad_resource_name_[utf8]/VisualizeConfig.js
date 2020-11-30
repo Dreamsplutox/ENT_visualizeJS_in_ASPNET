@@ -190,7 +190,6 @@ visualize(function (v) {
         $("#resource_selection").css("display", "block");
         $("#label_resource_selection").css("display", "block");
         $("#update_modal_btn").css("display", "block");
-        $("#disconnection_btn").css("display", "block");
         //hide auth
         $("#authentication_jasper").css("display", "none");
     }
