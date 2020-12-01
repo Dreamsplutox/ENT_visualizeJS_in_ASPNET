@@ -5,28 +5,17 @@
 La partie Model contient une classe "VisiteurWeb" qui représente l'utilisateur de l'application ASP.NET.
 
 C'est dans cette classe que seront stockés les identifiants de connexion Jasper :
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG1N.png "cod_img1n")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG1.png "cod_img1")
 
 
 ## Partie "Controller"
 
-La partie Controller se divise en 2 sections, une section qui va s'exécuter dès que l'utilisateur démarre l'application et une autre section qui contient l'ensemble des traitements à effectuer quand un formulaire est rempli.
-Il peut s'agir du formulaire de connexion qui permet d'accéder à l'application, du formulaire de déconnexion ou encore du formulaire qui permet de changer de "dossier source" (dossier à partir duquel on commence à afficher tous les rapports / tableaux de bord).
+La partie Controller se divise en 2 sections, une section qui va s'exécuter dès que l'utilisateur démarre l'application et une autre section qui va s'exécuter dès que l'utilisateur remplit un formulaire de connexion dans l'application, envoyant ainsi les paramètres nécessaires pour se connecter au service Jasper et récuperer des informations clés :
 
-*Actions à réaliser quand l'utilisateur se connecte sur la page*
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG2AN.png "cod_img2a")
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG2BN.png "cod_img2b")
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG2CN.png "cod_img2c")
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG2DN.png "cod_img2d")
-
-*Traitement à effectuer quand l'utilisateur remplit le formulaire de connexion*
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG3AN.png "cod_img3a")
-
-*Traitement à effectuer quand l'utilisateur remplit le formulaire qui permet de changer de dossier source*
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG3BN.png "cod_img3b")
-
-*Traitement à effectuer quand l'utilisateur remplit le formulaire de déconnexion*
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG3CN.png "cod_img3c")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG2A.png "cod_img2a")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG2B.png "cod_img2b")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG2C.png "cod_img2c")
+![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG3.png "cod_img3")
 
 ## Partie "Vue"
 
@@ -37,12 +26,6 @@ La partie Vue contient tous les éléments qui seront affichés, elle permet aus
 
 <b>Formulaire de connexion :</b><br>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG5.png "cod_img5")
-
-<b>Formulaire pour mettre à jour le dossier source :</b><br>
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG5AN.png "cod_img5a")
-
-<b>Formulaire de déconnexion :</b><br>
-![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG5BN.png "cod_img5b")
 
 <b>Selection d'une ressource (parmi celles générées dans notre javascript) :</b>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG6.png "cod_img6")
@@ -102,7 +85,6 @@ et une autre partie pour interagir avec visualize.js et configurer les ressource
 <br><b>modification de la ressource à afficher lorsqu'une option est sélectionnée :</b>
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG23A.png "cod_img23a")
 ![alt text](https://github.com/Dreamsplutox/visualizeJS_in_ASPNET/blob/main/readme_images/CODIMG23B.png "cod_img23b")
-
 
 
 
